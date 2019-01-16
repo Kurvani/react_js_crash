@@ -12,16 +12,22 @@ export class Todoitem extends Component {
   };
 
   //The e should be (e) but prettier removes the paretheses
-  markComplete = e => {
-    console.log(this.props);
-  };
 
   render() {
+    const { id, title } = this.props.todoprop;
     return (
       <div style={this.getStyle()}>
         <p>
-          <input type="checkbox" onChange={this.markComplete} />
-          {this.props.todoprop.title}
+          <input
+            type="checkbox"
+            onChange={this.props.markComplete.bind(this, id)}
+          />{" "}
+          {/* spacing for format */}
+          {title}
+          <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
+            {" "}
+            x{" "}
+          </button>
         </p>
       </div>
     );
@@ -31,6 +37,17 @@ export class Todoitem extends Component {
 // PropTypes
 Todoitem.propTypes = {
   todoprop: PropTypes.object.isRequired
+};
+
+//CSS styling for the delete button
+const btnStyle = {
+  background: "#ff0000",
+  color: "#fff",
+  border: "none",
+  padding: "5px 9px",
+  borderRadius: "50%",
+  cursor: "pointer",
+  float: "right"
 };
 
 export default Todoitem;
